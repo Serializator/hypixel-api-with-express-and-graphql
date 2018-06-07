@@ -1,21 +1,6 @@
 const { GraphQLObjectType, GraphQLList, GraphQLString, GraphQLFloat } = require('graphql');
 
-exports.ParkourType = new GraphQLObjectType({
-    name: 'Parkour',
-    description: '...',
-    fields: () => ({
-        name: {
-            type: GraphQLString,
-            resolve: parkour => parkour.name
-        },
-        timings: {
-            type: new GraphQLList(exports.ParkourTimeType),
-            resolve: parkour => parkour.timings
-        }
-    })
-});
-
-exports.ParkourTimeType = new GraphQLObjectType({
+const ParkourTimeType = new GraphQLObjectType({
     name: 'ParkourTime',
     description: '...',
     fields: () => ({
@@ -26,6 +11,21 @@ exports.ParkourTimeType = new GraphQLObjectType({
         timeTook: {
             type: GraphQLFloat,
             resolve: time => time.timeTook
+        }
+    })
+});
+
+exports.ParkourType = new GraphQLObjectType({
+    name: 'Parkour',
+    description: '...',
+    fields: () => ({
+        name: {
+            type: GraphQLString,
+            resolve: parkour => parkour.name
+        },
+        timings: {
+            type: new GraphQLList(ParkourTimeType),
+            resolve: parkour => parkour.timings
         }
     })
 });
