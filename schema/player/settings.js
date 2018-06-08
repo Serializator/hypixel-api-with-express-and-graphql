@@ -1,5 +1,24 @@
 const { GraphQLObjectType, GraphQLInt, GraphQLBoolean } = require('graphql')
 
+/**
+ * GraphQL Type Definition:
+ *     type Settings {
+ *         playerVisibility: Boolean
+ *         chatVisibility: Boolean
+ *         chatAlerts: Boolean
+ *         autoSpawnPet: Boolean
+ *         lobbySpeed: Boolean
+ *         lobbyProtection: Boolean
+ *         allowFriendRequests: Boolean
+ *         spectator: Spectator
+ *     }
+ * 
+ *     type Spectator {
+ *         nightVision: Boolean
+ *         speed: Int
+ *         spectatorsInvisible: Boolean
+ *     }
+ */
 module.exports = new GraphQLObjectType({
     name: 'Settings',
     description: '...',

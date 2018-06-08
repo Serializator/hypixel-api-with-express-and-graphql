@@ -1,6 +1,14 @@
 const { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt, GraphQLFloat } = require('graphql');
 
-// we do not need to export a type only used in this type
+/**
+ * GraphQL Type Definition:
+ *     type Vote {
+ *         source: String
+ *         total: Int
+ *         secondary: Int
+ *         last: Float
+ *     }
+ */
 const VoteType = new GraphQLObjectType({
     name: 'Vote',
     description: '...',
@@ -24,6 +32,15 @@ const VoteType = new GraphQLObjectType({
     })
 })
 
+/**
+ * GraphQL Type Definition:
+ *     type Voting {
+ *         total: Int
+ *         today: Int
+ *         last: Float
+ *         votes: [Vote]
+ *     }
+ */
 module.exports = new GraphQLObjectType({
     name: 'Voting',
     description: '...',

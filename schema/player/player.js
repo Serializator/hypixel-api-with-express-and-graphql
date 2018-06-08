@@ -6,6 +6,29 @@ const { ParkourType, ParkourTimeType } = require('./parkour');
 const VanityType = require('./vanity');
 const VotingType = require('./voting');
 
+/**
+ * GraphQL Type Definition:
+ *     type Player {
+ *         _id: String
+ *         uuid: String
+ *         displayName: String
+ *         playerName: String
+ *         packageRank: String
+ *         firstLogin: Float
+ *         lastLogin: Float
+ *         networkExp: Int
+ *         userLanguage: String
+ *         websiteSet: Boolean
+ *         mainLobbyTutorial: Boolean
+ *         mostRecentlyThanked: String
+ *         mostRecentlyTippedUuid: String
+ *         settings: Settings
+ *         Achievements: [Achievement]
+ *         parkour: [Parkour]
+ *         vanity: Vanity
+ *         voting: Voting
+ *     }
+ */
 module.exports = new GraphQLObjectType({
     name: 'Player',
     description: '...',

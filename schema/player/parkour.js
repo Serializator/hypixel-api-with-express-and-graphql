@@ -1,5 +1,12 @@
 const { GraphQLObjectType, GraphQLList, GraphQLString, GraphQLFloat } = require('graphql');
 
+/**
+ * GraphQL Type Definition:
+ *     type ParkourTime {
+ *         timeStart: Float
+ *         timeTook: Float
+ *     }
+ */
 const ParkourTimeType = new GraphQLObjectType({
     name: 'ParkourTime',
     description: '...',
@@ -15,6 +22,13 @@ const ParkourTimeType = new GraphQLObjectType({
     })
 });
 
+/**
+ * GraphQL Type Definition:
+ *     type Parkour {
+ *         name: String
+ *         timings: [ParkourTime]
+ *     }
+ */
 exports.ParkourType = new GraphQLObjectType({
     name: 'Parkour',
     description: '...',
