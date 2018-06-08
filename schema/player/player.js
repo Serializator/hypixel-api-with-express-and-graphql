@@ -5,6 +5,7 @@ const SettingsType = require('./settings');
 const { ParkourType, ParkourTimeType } = require('./parkour');
 const VanityType = require('./vanity');
 const VotingType = require('./voting');
+const RewardsType = require('./rewards');
 
 /**
  * GraphQL Type Definition:
@@ -28,6 +29,7 @@ const VotingType = require('./voting');
  *         vanity: Vanity
  *         voting: Voting
  *         levels: [Int]
+ *         rewards: Rewards
  *     }
  */
 module.exports = new GraphQLObjectType({
@@ -77,6 +79,10 @@ module.exports = new GraphQLObjectType({
         levels: {
             type: GraphQLList(GraphQLInt),
             resolve: resolveLevels
+        },
+        rewards: {
+            type: RewardsType,
+            resolve: player => player
         }
     })
 });
