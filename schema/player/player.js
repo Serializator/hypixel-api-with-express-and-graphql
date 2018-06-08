@@ -32,87 +32,55 @@ const VotingType = require('./voting');
 module.exports = new GraphQLObjectType({
     name: 'Player',
     description: '...',
+    
     fields: () => ({
-        _id: {
-            type: GraphQLString,
-            resolve: json => json.player._id
-        },
-        uuid: {
-            type: GraphQLString,
-            resolve: json => json.player.uuid
-        },
+        _id: { type: GraphQLString },
+        uuid: { type: GraphQLString },
         displayName: {
             type: GraphQLString,
-            resolve: json => json.player.displayname
+            resolve: player => player.displayname
         },
         playerName: {
             type: GraphQLString,
-            resolve: json => json.player.playername
+            resolve: player => player.playername
         },
-        packageRank: {
-            type: GraphQLString,
-            resolve: json => json.player.packageRank
-        },
-        firstLogin: {
-            type: GraphQLFloat,
-            resolve: json => json.player.firstLogin
-        },
-        lastLogin: {
-            type: GraphQLFloat,
-            resolve: json => json.player.lastLogin 
-        },
-        networkExp: {
-            type: GraphQLInt,
-            resolve: json => json.player.networkExp
-        },
-        userLanguage: {
-            type: GraphQLString,
-            resolve: json => json.player.userLanguage
-        },
-        websiteSet: {
-            type: GraphQLBoolean,
-            resolve: json => json.player.websiteSet
-        },
-        mainLobbyTutorial: {
-            type: GraphQLBoolean,
-            resolve: json => json.player.mainlobbytutorial
-        },
-        mostRecentlyThanked: {
-            type: GraphQLString,
-            resolve: json => json.player.mostRecentlyThanked
-        },
-        mostRecentlyTippedUuid: {
-            type: GraphQLString,
-            resolve: json => json.player.mostRecentlyTippedUuid  
-        },
+        packageRank: { type: GraphQLString },
+        firstLogin: { type: GraphQLFloat },
+        lastLogin: { type: GraphQLFloat },
+        networkExp: { type: GraphQLInt },
+        userLanguage: { type: GraphQLString },
+        websiteSet: { type: GraphQLBoolean },
+        mainLobbyTutorial: { type: GraphQLBoolean },
+        mostRecentlyThanked: { type: GraphQLString },
+        mostRecentlyTippedUuid: { type: GraphQLString },
         settings: {
             type: SettingsType,
-            resolve: json => json.player
+            resolve: player => player
         },
         achievements: {
             type: new GraphQLList(AchievementType),
-            resolve: json => Object.keys(json.player.achievements).map(achievement => ({
+            resolve: player => Object.keys(player.achievements).map(achievement => ({
                 name: achievement,
-                score: json.player.achievements[achievement]
-            })).concat(json.player.achievementsOneTime.map(achievement => ({
+                score: player.achievements[achievement]
+            })).concat(player.achievementsOneTime.map(achievement => ({
                 name: achievement,
                 score: 1
             })))
         },
         parkour: {
             type: new GraphQLList(ParkourType),
-            resolve: json => Object.keys(json.player.parkourCompletions).map(parkour => ({
+            resolve: player => Object.keys(player.parkourCompletions).map(parkour => ({
                 name: parkour,
-                timings: json.player.parkourCompletions[parkour]
+                timings: player.parkourCompletions[parkour]
             }))
         },
         vanity: {
             type: VanityType,
-            resolve: json => json.player.vanityMeta
+            resolve: player => player.vanityMeta
         },
         voting: {
             type: VotingType,
-            resolve: json => json.player.voting
+            resolve: player => player.voting
         }
     })
 });

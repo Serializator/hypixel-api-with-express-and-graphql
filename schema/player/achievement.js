@@ -15,14 +15,9 @@ const { GraphQLObjectType, GraphQLNonNull, GraphQLString, GraphQLInt } = require
 module.exports = new GraphQLObjectType({
     name: 'Achievement',
     description: '...',
+    
     fields: () => ({
-        name: {
-            type: new GraphQLNonNull(GraphQLString),
-            resolve: achievement => achievement.name
-        },
-        score: {
-            type: GraphQLInt,
-            resolve: achievement => achievement.score
-        }
+        name: { type: new GraphQLNonNull(GraphQLString) },
+        score: { type: GraphQLInt }
     })
 });

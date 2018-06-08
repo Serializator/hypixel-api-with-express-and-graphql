@@ -44,21 +44,14 @@ const VoteType = new GraphQLObjectType({
 module.exports = new GraphQLObjectType({
     name: 'Voting',
     description: '...',
+
     fields: () => ({
-        total: {
-            type: GraphQLInt,
-            resolve: json => json.total
-        },
-        today: {
-            type: GraphQLInt,
-            resolve: json => json.votesToday
-        },
-        last: {
-            type: GraphQLFloat,
-            resolve: json => json.last_vote
-        },
+        total: { type: GraphQLInt },
+        today: { type: GraphQLInt },
+        last: { type: GraphQLFloat },
         votes: {
             type: new GraphQLList(VoteType),
+            
             resolve: json => {
                 const votes = {};
 

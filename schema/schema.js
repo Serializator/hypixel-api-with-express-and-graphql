@@ -19,6 +19,7 @@ module.exports = new GraphQLSchema({
                 },
                 resolve: (root, args) => fetch(`https://api.hypixel.net/player?key=${args.key}&uuid=${args.uuid}`)
                                             .then(response => response.json())
+                                            .then(json => json.player)
             }
         })
     })

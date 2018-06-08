@@ -11,14 +11,8 @@ const ParkourTimeType = new GraphQLObjectType({
     name: 'ParkourTime',
     description: '...',
     fields: () => ({
-        timeStart: {
-            type: GraphQLFloat,
-            resolve: time => time.timeStart
-        },
-        timeTook: {
-            type: GraphQLFloat,
-            resolve: time => time.timeTook
-        }
+        timeStart: { type: GraphQLFloat },
+        timeTook: { type: GraphQLFloat }
     })
 });
 
@@ -32,14 +26,9 @@ const ParkourTimeType = new GraphQLObjectType({
 exports.ParkourType = new GraphQLObjectType({
     name: 'Parkour',
     description: '...',
+    
     fields: () => ({
-        name: {
-            type: GraphQLString,
-            resolve: parkour => parkour.name
-        },
-        timings: {
-            type: new GraphQLList(ParkourTimeType),
-            resolve: parkour => parkour.timings
-        }
+        name: { type: GraphQLString },
+        timings: { type: new GraphQLList(ParkourTimeType) }
     })
 });

@@ -22,54 +22,57 @@ const { GraphQLObjectType, GraphQLInt, GraphQLBoolean } = require('graphql')
 module.exports = new GraphQLObjectType({
     name: 'Settings',
     description: '...',
+
     fields: () => ({
         playerVisibility: {
             type: GraphQLBoolean,
-            resolve: json => json.settings.playerVisibility
+            resolve: player => player.settings.playerVisibility
         },
         chatVisibility: {
             type: GraphQLBoolean,
-            resolve: json => json.settings.chatVisibility
+            resolve: player => player.settings.chatVisibility
         },
         chatAlerts: {
             type: GraphQLBoolean,
-            resolve: json => json.settings.chatAlerts
+            resolve: player => player.settings.chatAlerts
         },
         autoSpawnPet: {
             type: GraphQLBoolean,
-            resolve: json => json.settings.autoSpawnPet
+            resolve: player => player.settings.autoSpawnPet
         },
         lobbySpeed: {
             type: GraphQLBoolean,
-            resolve: json => json.settings.lobbySpeed
+            resolve: player => player.settings.lobbySpeed
         },
         lobbyProtection: {
             type: GraphQLBoolean,
-            resolve: json => json.settings.lobbyProtection
+            resolve: player => player.settings.lobbyProtection
         },
         allowFriendRequests: {
             type: GraphQLBoolean,
-            resolve: json => json.settings.allowFriendRequests
+            resolve: player => player.settings.allowFriendRequests
         },
         spectator: {
             type: new GraphQLObjectType({
                 name: 'Spectator',
+                description: '...',
+
                 fields: () => ({
                     nightVision: {
                         type: GraphQLBoolean,
-                        resolve: json => json.spec_night_vision
+                        resolve: player => player.spec_night_vision
                     },
                     speed: {
                         type: GraphQLInt,
-                        resolve: json => json.spec_speed
+                        resolve: player => player.spec_speed
                     },
                     spectatorsInvisible: {
                         type: GraphQLBoolean,
-                        resolve: json => json.spec_spectators_invisible
+                        resolve: player => player.spec_spectators_invisible
                     }
                 })
             }),
-            resolve: json => json
+            resolve: player => player
         }
     })
 });
