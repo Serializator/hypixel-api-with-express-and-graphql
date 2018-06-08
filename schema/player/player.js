@@ -27,12 +27,13 @@ const VotingType = require('./voting');
  *         parkour: [Parkour]
  *         vanity: Vanity
  *         voting: Voting
+ *         levels: [Int]
  *     }
  */
 module.exports = new GraphQLObjectType({
     name: 'Player',
     description: '...',
-    
+
     fields: () => ({
         _id: { type: GraphQLString },
         uuid: { type: GraphQLString },
@@ -59,20 +60,11 @@ module.exports = new GraphQLObjectType({
         },
         achievements: {
             type: new GraphQLList(AchievementType),
-            resolve: player => Object.keys(player.achievements).map(achievement => ({
-                name: achievement,
-                score: player.achievements[achievement]
-            })).concat(player.achievementsOneTime.map(achievement => ({
-                name: achievement,
-                score: 1
-            })))
+            resolve: resolveAchievements
         },
         parkour: {
             type: new GraphQLList(ParkourType),
-            resolve: player => Object.keys(player.parkourCompletions).map(parkour => ({
-                name: parkour,
-                timings: player.parkourCompletions[parkour]
-            }))
+            resolve: resolveParkour
         },
         vanity: {
             type: VanityType,
@@ -81,6 +73,32 @@ module.exports = new GraphQLObjectType({
         voting: {
             type: VotingType,
             resolve: player => player.voting
+        },
+        levels: {
+            type: GraphQLList(GraphQLInt),
+            resolve: resolveLevels
         }
     })
 });
+
+function resolveAchievements(player) {
+    return Object.keys(player.achievements).map(achievement => ({
+        name: achievement,
+        score: player.achievements[achievement]
+    })).concat(player.achievementsOneTime.map(achievement => ({
+        name: achievement,
+        score: 1
+    })));
+}
+
+function resolveParkour(player) {
+    return Object.keys(player.parkourCompletions).map(parkour => ({
+        name: parkour,
+        timings: player.parkourCompletions[parkour]
+    }));
+}
+
+function resolveLevels(player) {
+    return Object.keys(player).filter(key => key.startsWith('levelingReward_'))
+        .map(key => key.substring('levelingReward_'.length, key.length));
+}
