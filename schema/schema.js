@@ -17,7 +17,7 @@ module.exports = new GraphQLSchema({
                         type: GraphQLString
                     }
                 },
-                resolve: (root, args) => fetch(`https://api.hypixel.net/player?key=${args.key}&uuid=${args.uuid}`)
+                resolve: (root, { key, uuid }) => fetch(`https://api.hypixel.net/player?key=${key}&uuid=${uuid}`)
                                             .then(response => response.json())
                                             .then(json => json.player)
             }
