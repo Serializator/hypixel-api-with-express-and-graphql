@@ -28,7 +28,6 @@ const RewardsType = require('./rewards');
  *         parkour: [Parkour]
  *         vanity: Vanity
  *         voting: Voting
- *         levels: [Int]
  *         rewards: Rewards
  *     }
  */
@@ -76,10 +75,6 @@ module.exports = new GraphQLObjectType({
             type: VotingType,
             resolve: player => player.voting
         },
-        levels: {
-            type: GraphQLList(GraphQLInt),
-            resolve: resolveLevels
-        },
         rewards: {
             type: RewardsType,
             resolve: player => player
@@ -102,9 +97,4 @@ function resolveParkour(player) {
         name: parkour,
         timings: player.parkourCompletions[parkour]
     }));
-}
-
-function resolveLevels(player) {
-    return Object.keys(player).filter(key => key.startsWith('levelingReward_'))
-        .map(key => key.substring('levelingReward_'.length, key.length));
 }

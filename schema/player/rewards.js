@@ -1,6 +1,7 @@
 const {
     GraphQLObjectType,
     GraphQLString,
+    GraphQLInt,
     GraphQLList
 } = require('graphql');
 
@@ -9,6 +10,7 @@ const {
  *     type Rewards {
  *         npcs: [String]
  *         presents: [String]
+ *         levels: [Int]
  *     }
  */
 module.exports = new GraphQLObjectType({
@@ -23,6 +25,10 @@ module.exports = new GraphQLObjectType({
         presents: {
             type: new GraphQLList(GraphQLString),
             resolve: resolvePresents
+        },
+        levels: {
+            type: new GraphQLList(GraphQLInt),
+            resolve: resolveLevels
         }
     })
 });
@@ -35,4 +41,9 @@ function resolveNPCs(player) {
 function resolvePresents(player) {
     return Object.keys(player).filter(key => key.startsWith('PRESENT_FIND_'))
         .map(key => key.substring('PRESENT_FIND_'.length, key.length));
+}
+
+function resolveLevels(player) {
+    return Object.keys(player).filter(key => key.startsWith('levelingReward_'))
+        .map(key => key.substring('levelingReward_'.length, key.length));
 }
