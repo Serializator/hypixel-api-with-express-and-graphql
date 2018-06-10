@@ -1,4 +1,9 @@
-const { GraphQLObjectType, GraphQLNonNull, GraphQLString, GraphQLInt } = require('graphql');
+const {
+    GraphQLObjectType,
+    GraphQLNonNull,
+    GraphQLString,
+    GraphQLInt
+} = require('graphql');
 
 /**
  * In the Hypixel API there are two types of achievements.

@@ -1,4 +1,8 @@
-const { GraphQLObjectType, GraphQLInt, GraphQLBoolean } = require('graphql')
+const {
+    GraphQLObjectType,
+    GraphQLInt,
+    GraphQLBoolean
+} = require('graphql')
 
 /**
  * GraphQL Type Definition:
@@ -28,30 +32,37 @@ module.exports = new GraphQLObjectType({
             type: GraphQLBoolean,
             resolve: player => player.settings.playerVisibility
         },
+
         chatVisibility: {
             type: GraphQLBoolean,
             resolve: player => player.settings.chatVisibility
         },
+
         chatAlerts: {
             type: GraphQLBoolean,
             resolve: player => player.settings.chatAlerts
         },
+
         autoSpawnPet: {
             type: GraphQLBoolean,
             resolve: player => player.settings.autoSpawnPet
         },
+
         lobbySpeed: {
             type: GraphQLBoolean,
             resolve: player => player.settings.lobbySpeed
         },
+
         lobbyProtection: {
             type: GraphQLBoolean,
             resolve: player => player.settings.lobbyProtection
         },
+
         allowFriendRequests: {
             type: GraphQLBoolean,
             resolve: player => player.settings.allowFriendRequests
         },
+        
         spectator: {
             type: new GraphQLObjectType({
                 name: 'Spectator',
@@ -62,16 +73,19 @@ module.exports = new GraphQLObjectType({
                         type: GraphQLBoolean,
                         resolve: player => player.spec_night_vision
                     },
+                    
                     speed: {
                         type: GraphQLInt,
                         resolve: player => player.spec_speed
                     },
+
                     spectatorsInvisible: {
                         type: GraphQLBoolean,
                         resolve: player => player.spec_spectators_invisible
                     }
                 })
             }),
+
             resolve: player => player
         }
     })

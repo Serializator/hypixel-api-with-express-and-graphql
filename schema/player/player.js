@@ -1,11 +1,18 @@
-const { GraphQLObjectType, GraphQLString, GraphQLFloat, GraphQLList, GraphQLBoolean, GraphQLInt } = require('graphql');
+const {
+    GraphQLObjectType,
+    GraphQLList,
+    GraphQLString,
+    GraphQLInt,
+    GraphQLFloat,
+    GraphQLBoolean
+} = require('graphql');
 
-const AchievementType = require('./achievement');
-const SettingsType = require('./settings');
-const { ParkourType, ParkourTimeType } = require('./parkour');
-const VanityType = require('./vanity');
-const VotingType = require('./voting');
-const RewardsType = require('./rewards');
+const GraphQLAchievement = require('./achievement');
+const GraphQLSettings = require('./settings');
+const GraphQLParkour = require('./parkour');
+const GraphQLVanity = require('./vanity');
+const GraphQLVoting = require('./voting');
+const GraphQLRewards = require('./rewards');
 
 /**
  * GraphQL Type Definition:
@@ -38,14 +45,17 @@ module.exports = new GraphQLObjectType({
     fields: () => ({
         _id: { type: GraphQLString },
         uuid: { type: GraphQLString },
+
         displayName: {
             type: GraphQLString,
             resolve: player => player.displayname
         },
+
         playerName: {
             type: GraphQLString,
             resolve: player => player.playername
         },
+
         packageRank: { type: GraphQLString },
         firstLogin: { type: GraphQLFloat },
         lastLogin: { type: GraphQLFloat },
@@ -55,28 +65,34 @@ module.exports = new GraphQLObjectType({
         mainLobbyTutorial: { type: GraphQLBoolean },
         mostRecentlyThanked: { type: GraphQLString },
         mostRecentlyTippedUuid: { type: GraphQLString },
+
         settings: {
-            type: SettingsType,
+            type: GraphQLSettings,
             resolve: player => player
         },
+
         achievements: {
-            type: new GraphQLList(AchievementType),
+            type: new GraphQLList(GraphQLAchievement),
             resolve: resolveAchievements
         },
+
         parkour: {
-            type: new GraphQLList(ParkourType),
+            type: new GraphQLList(GraphQLParkour),
             resolve: resolveParkour
         },
+
         vanity: {
-            type: VanityType,
+            type: GraphQLVanity,
             resolve: player => player.vanityMeta
         },
+
         voting: {
-            type: VotingType,
+            type: GraphQLVoting,
             resolve: player => player.voting
         },
+        
         rewards: {
-            type: RewardsType,
+            type: GraphQLRewards,
             resolve: player => player
         }
     })

@@ -22,10 +22,12 @@ module.exports = new GraphQLObjectType({
             type: new GraphQLList(GraphQLString),
             resolve: resolveNPCs
         },
+        
         presents: {
             type: new GraphQLList(GraphQLString),
             resolve: resolvePresents
         },
+
         levels: {
             type: new GraphQLList(GraphQLInt),
             resolve: resolveLevels

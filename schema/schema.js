@@ -1,15 +1,20 @@
-const { GraphQLSchema, GraphQLObjectType, GraphQLString } = require('graphql');
-const PlayerType = require('./player/player');
+const {
+    GraphQLSchema,
+    GraphQLObjectType,
+    GraphQLString
+} = require('graphql');
+
+const GraphQLPlayer = require('./player/player');
 const fetch = require('node-fetch');
 
 module.exports = new GraphQLSchema({
     query: new GraphQLObjectType({
         name: 'Query',
         description: '...',
-        
+
         fields: () => ({
             player: {
-                type: PlayerType,
+                type: GraphQLPlayer,
 
                 args: {
                     key: { type: GraphQLString },

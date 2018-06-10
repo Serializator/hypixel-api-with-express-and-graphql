@@ -1,4 +1,10 @@
-const { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt, GraphQLFloat } = require('graphql');
+const {
+    GraphQLObjectType,
+    GraphQLList,
+    GraphQLString,
+    GraphQLInt,
+    GraphQLFloat
+} = require('graphql');
 
 /**
  * GraphQL Type Definition:
@@ -12,23 +18,12 @@ const { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt, GraphQLFloat 
 const VoteType = new GraphQLObjectType({
     name: 'Vote',
     description: '...',
+
     fields: () => ({
-        source: {
-            type: GraphQLString,
-            resolve: vote => vote.source
-        },
-        total: {
-            type: GraphQLInt,
-            resolve: vote => vote.total
-        },
-        secondary: {
-            type: GraphQLInt,
-            resolve: vote => vote.secondary
-        },
-        last: {
-            type: GraphQLFloat,
-            resolve: vote => vote.last
-        }
+        source: { type: GraphQLString },
+        total: { type: GraphQLInt },
+        secondary: { type: GraphQLInt },
+        last: { type: GraphQLFloat }
     })
 })
 
