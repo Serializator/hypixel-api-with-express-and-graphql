@@ -6,20 +6,21 @@ module.exports = new GraphQLSchema({
     query: new GraphQLObjectType({
         name: 'Query',
         description: '...',
+        
         fields: () => ({
             player: {
                 type: PlayerType,
+
                 args: {
-                    key: {
-                        type: GraphQLString,
-                    },
-                    uuid: {
-                        type: GraphQLString
-                    }
+                    key: { type: GraphQLString },
+                    uuid: { type: GraphQLString }
                 },
-                resolve: (root, { key, uuid }) => fetch(`https://api.hypixel.net/player?key=${key}&uuid=${uuid}`)
-                                            .then(response => response.json())
-                                            .then(json => json.player)
+                
+                resolve: (root, { uniqueId }, { authToken }) => {
+                    return fetch(`https://api.hypixel.net/player?key=${authToken}&uuid=${uniqueId}`)
+                    .then(response => response.json())
+                    .then(json => json.player)
+                }
             }
         })
     })
